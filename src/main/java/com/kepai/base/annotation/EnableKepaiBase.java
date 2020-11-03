@@ -13,5 +13,5 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Documented
 @Import({KepaiCommonConfiguration.class})
-public @interface EnableKepaiCommon {
+public @interface EnableKepaiBase {
 }
