@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kepai.common.mapper.BaseSystemLogLoginMapper">
+    <resultMap id="BaseResultMap" type="com.kepai.common.pojos.dao.BaseSystemLogLogin">
+        <!--@mbg.generated-->
+        <!--@Table base_system_log_login-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="is_deleted" jdbcType="INTEGER" property="isDeleted"/>
+        <result column="manager_id" jdbcType="INTEGER" property="managerId"/>
+        <result column="ip" jdbcType="VARCHAR" property="ip"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, create_time, update_time, is_deleted, manager_id, ip, address
+    </sql>
+
+    <select id="listLoginLog" resultType="java.util.Map">
+        select bsll.*, am.nick_name nickName
+        from base_system_log_login bsll
+        left join auth_manager am on am.id = bsll.manager_id
+        where 1=1
+        <if test="keyword != null and keyword != ''">and am.nick_name like concat('%',#{keyword},'%')</if>
+        order by bsll.create_time desc
+    </select>
+
+    <select id="listOperationLog" resultType="java.util.Map">
+        select bslo.*, am.nick_name nickName
+        from base_system_log_operation bslo
+        left join auth_manager am on am.id = bslo.manager_id
+        where 1=1
+        <if test="keyword != null and keyword != ''">
+            and (
+            am.nick_name like concat('%',#{keyword},'%')
+            or bslo.title like concat('%',#{keyword},'%')
+            or bslo.subject like concat('%',#{keyword},'%')
+            )
+        </if>
+        order by bslo.create_time desc
+    </select>
+
+</mapper>

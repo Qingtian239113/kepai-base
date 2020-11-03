@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kepai.common.mapper.AuthRoleMapper">
+    <resultMap id="BaseResultMap" type="com.kepai.common.pojos.dao.AuthRole">
+        <!--@mbg.generated-->
+        <!--@Table auth_role-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="is_deleted" jdbcType="INTEGER" property="isDeleted"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, create_time, update_time, is_deleted, `name`, remark
+    </sql>
+
+    <select id="getRoleModulesubList" resultType="java.util.Map">
+        select role_id roleId, modulesub_id modulesubId
+        from auth_role_modulesub
+        where role_id = #{roleId}
+    </select>
+
+    <insert id="modulesubAdd">
+
+        delete from auth_role_modulesub where role_id = #{roleId};
+
+        <foreach collection="list" item="item" index="item" separator=";">
+            insert into auth_role_modulesub(role_id, modulesub_id) values(#{roleId},#{item})
+        </foreach>
+
+    </insert>
+
+</mapper>

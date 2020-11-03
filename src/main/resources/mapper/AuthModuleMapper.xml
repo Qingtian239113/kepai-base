@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kepai.common.mapper.AuthModuleMapper">
+    <resultMap id="BaseResultMap" type="com.kepai.common.pojos.dao.AuthModule">
+        <!--@mbg.generated-->
+        <!--@Table auth_module-->
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="is_deleted" jdbcType="INTEGER" property="isDeleted"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="seq" jdbcType="INTEGER" property="seq"/>
+        <result column="is_public" jdbcType="INTEGER" property="isPublic"/>
+        <result column="is_mobile" jdbcType="INTEGER" property="isMobile"/>
+        <result column="mobile_url" jdbcType="VARCHAR" property="mobileUrl"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, create_time, update_time, is_deleted, `name`, avatar, seq, is_public, is_mobile,
+        mobile_url
+    </sql>
+</mapper>

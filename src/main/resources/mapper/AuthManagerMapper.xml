@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kepai.common.mapper.AuthManagerMapper">
+    <resultMap id="BaseResultMap" type="com.kepai.common.pojos.dao.AuthManager">
+        <!--@mbg.generated-->
+        <!--@Table auth_manager-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="is_deleted" jdbcType="INTEGER" property="isDeleted"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="is_super" jdbcType="INTEGER" property="isSuper"/>
+        <result column="role_id" jdbcType="INTEGER" property="roleId"/>
+        <result column="phone" jdbcType="INTEGER" property="phone"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, create_time, update_time, is_deleted, account, nick_name,phone, `password`, remark,
+        is_super, role_id
+    </sql>
+
+    <select id="getUserList" resultType="java.util.Map">
+        select au.id,
+               au.account,
+               au.nick_name   nickName,
+               au.phone,
+               au.remark,
+               au.is_super    isSuper,
+               au.role_id     roleId,
+               au.update_time updateTime,
+               ar.name        roleName
+        from auth_manager au
+                 left join auth_role ar on ar.id = au.role_id
+        where au.is_deleted = 0
+    </select>
+
+    <select id="getModuleOneByRoleGroup" resultType="java.util.Map">
+        select am.id id, am.name name
+        from auth_module am
+        where am.is_deleted = 0
+        and am.id in (
+        select distinct module_id
+        from auth_modulesub am2
+        where am2.is_deleted = 0
+        and am2.id in (
+        select distinct modulesub_id from auth_role_modulesub arm where arm.role_id = #{roleId}
+        )
+        )
+        order by am.seq
+    </select>
+
+    <select id="getModuleTwoByRoleGroup" resultType="java.util.Map">
+        select am.id id, am.name name
+        from auth_modulesub am
+        where am.is_deleted = 0
+        and am.module_id = #{moduleId}
+        and am.id in (
+        select distinct modulesub_id from auth_role_modulesub arm where arm.role_id = #{roleId}
+        )
+        order by am.seq
+    </select>
+
+</mapper>
