@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kepai.common.mapper.AuthRoleMapper">
-    <resultMap id="BaseResultMap" type="com.kepai.common.pojos.dao.AuthRole">
+<mapper namespace="com.kepai.base.mapper.AuthRoleMapper">
+    <resultMap id="BaseResultMap" type="com.kepai.base.pojos.dao.AuthRole">
         <!--@mbg.generated-->
         <!--@Table auth_role-->
         <id column="id" jdbcType="INTEGER" property="id"/>

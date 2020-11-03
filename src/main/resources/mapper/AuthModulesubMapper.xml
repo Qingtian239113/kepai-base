@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kepai.common.mapper.AuthModulesubMapper">
-    <resultMap id="BaseResultMap" type="com.kepai.common.pojos.dao.AuthModulesub">
+<mapper namespace="com.kepai.base.mapper.AuthModulesubMapper">
+    <resultMap id="BaseResultMap" type="com.kepai.base.pojos.dao.AuthModulesub">
         <!--@mbg.generated-->
         <!--@Table auth_modulesub-->
         <id column="id" jdbcType="VARCHAR" property="id"/>
@@ -19,7 +19,7 @@
         id, create_time, update_time, is_deleted, `name`, avatar, seq, module_id, `type`
     </sql>
 
-    <select id="getModulesubList" resultType="com.kepai.common.pojos.vo.ModulesubVo">
+    <select id="getModulesubList" resultType="com.kepai.base.pojos.vo.ModulesubVo">
         select ams.*, am.name moduleName
         from auth_modulesub ams
                  left join auth_module am on (am.id = ams.module_id and am.is_deleted = 0)

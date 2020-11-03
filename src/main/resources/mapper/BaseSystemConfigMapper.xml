@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kepai.common.mapper.BaseSystemConfigMapper">
-    <resultMap id="BaseResultMap" type="com.kepai.common.pojos.dao.BaseSystemConfig">
+<mapper namespace="com.kepai.base.mapper.BaseSystemConfigMapper">
+    <resultMap id="BaseResultMap" type="com.kepai.base.pojos.dao.BaseSystemConfig">
         <!--@mbg.generated-->
         <!--@Table base_system_config-->
         <id column="id" jdbcType="INTEGER" property="id"/>
