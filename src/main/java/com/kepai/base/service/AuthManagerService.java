@@ -82,7 +82,7 @@ public class AuthManagerService extends ServiceImpl<AuthManagerMapper, AuthManag
      *
      * @param dto
      */
-    public LoginVo userLogin(UserLoginDTO dto, HttpServletRequest request) {
+    public LoginVo userLogin(UserLoginDTO dto, HttpServletRequest request, boolean onlySuper) {
         QueryWrapper<AuthManager> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("account", dto.getAccount());
         queryWrapper.eq("is_deleted", 0);
@@ -92,6 +92,10 @@ public class AuthManagerService extends ServiceImpl<AuthManagerMapper, AuthManag
         if (authManager == null) {
             throw new ApiException("该账号不存在");
         }
+        if (onlySuper && authManager.getIsSuper() != 1) {
+            throw new ApiException("您无权登录超管端");
+        }
+
         PasswordUtils.verifyPassword(dto.getPassword(), authManager.getPassword());
 
         // 添加登录日志

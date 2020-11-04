@@ -19,7 +19,7 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/common")
-public class CommonController {
+public class BaseCommonController {
 
     @Autowired
     AuthManagerService authManagerService;
@@ -28,17 +28,33 @@ public class CommonController {
 
 
     /**
-     * 用户登录
+     * 管理员登录
      *
      * @param dto
      * @return
      */
-    @RequestMapping("/user/login")
-    public ApiResp login(@Valid @RequestBody UserLoginDTO dto, HttpSession httpSession, HttpServletRequest request) {
+    @RequestMapping("/manager/login")
+    public ApiResp adminLogin(@Valid @RequestBody UserLoginDTO dto, HttpSession httpSession, HttpServletRequest request) {
 
         timedCacheService.verifyImage(httpSession.getId(), dto.getCode());
-        LoginVo loginVo = authManagerService.userLogin(dto, request);
+        LoginVo loginVo = authManagerService.userLogin(dto, request, false);
 
+        return ApiResp.respOK(loginVo);
+    }
+
+
+    /**
+     * 超管登录
+     *
+     * @param dto
+     * @param httpSession
+     * @param request
+     * @return
+     */
+    @RequestMapping("/super/login")
+    public ApiResp superLogin(@Valid @RequestBody UserLoginDTO dto, HttpSession httpSession, HttpServletRequest request) {
+        timedCacheService.verifyImage(httpSession.getId(), dto.getCode());
+        LoginVo loginVo = authManagerService.userLogin(dto, request, true);
         return ApiResp.respOK(loginVo);
     }
 
