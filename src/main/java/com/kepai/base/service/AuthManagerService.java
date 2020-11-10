@@ -116,26 +116,9 @@ public class AuthManagerService extends ServiceImpl<AuthManagerMapper, AuthManag
         if (authManager == null || authManager.getIsDeleted() != 0) {
             throw new ApiException("该账号不存在");
         }
+
+        // 用户拥有的模块
         List<Map<String, Object>> mapList = getBaseMapper().getModuleOneByRoleGroup(authManager.getRoleId());
-        if (authManager.getIsSuper() != 0) {
-            // 模块管理
-            Map<String, Object> moduleMap = new HashMap<>(16);
-            moduleMap.put("id", "module");
-            moduleMap.put("name", "模块管理");
-            mapList.add(moduleMap);
-
-            // 管理人员
-            Map<String, Object> authMap = new HashMap<>(16);
-            authMap.put("id", "auth");
-            authMap.put("name", "管理人员");
-            mapList.add(authMap);
-
-            // 系统配置
-            Map<String, Object> systemMap = new HashMap<>(16);
-            systemMap.put("id", "system");
-            systemMap.put("name", "系统管理");
-            mapList.add(systemMap);
-        }
 
         // 欢迎页
         Map<String, Object> welcomeMap = new HashMap<>(16);

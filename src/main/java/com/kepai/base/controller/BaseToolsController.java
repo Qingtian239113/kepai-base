@@ -5,8 +5,8 @@ import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.io.FileTypeUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
-import com.kepai.base.pojos.ApiResp;
 import com.kepai.base.config.exception.ApiException;
+import com.kepai.base.pojos.ApiResp;
 import com.kepai.base.service.TimedCacheService;
 import com.kepai.base.service.ToolsFileService;
 import com.kepai.base.utils.FileHelper;
@@ -31,7 +31,7 @@ import javax.servlet.http.HttpSession;
  */
 @RestController
 @RequestMapping(value = {"/tools"})
-public class ToolsController {
+public class BaseToolsController {
 
     @Autowired
     ToolsFileService toolsFileService;
